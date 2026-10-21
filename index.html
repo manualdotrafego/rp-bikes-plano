@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RP Bikes Shop · Plano de Tráfego Pago</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,800;0,900;1,800;1,900&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --y:#fad610; --y2:#ffe55c; --k:#111111; --k2:#1c1c1c; --k3:#2a2a2a;
+  --w:#ffffff; --g:#9a9a9a; --line:#333;
+  --disp:"Archivo","Arial Black",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{margin:0;background:var(--k);color:var(--w);font:17px/1.5 var(--disp);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.slide{min-height:100vh;min-height:100dvh;scroll-snap-align:start;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:72px max(20px,5vw) 72px}
+.inner{max-width:1180px;width:100%;margin:0 auto;display:grid;gap:28px;position:relative;z-index:2}
+.y{background:var(--y);color:var(--k)}
+.k2{background:var(--k2)}
+h1,h2,h3{margin:0;font-weight:900;font-style:italic;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance}
+h1{font-size:clamp(2.8rem,8vw,6.4rem)}
+h2{font-size:clamp(2rem,5vw,3.8rem)}
+h3{font-size:clamp(1.1rem,2vw,1.4rem)}
+p{margin:0;max-width:62ch}
+.tag{display:inline-flex;align-items:center;gap:10px;font:700 .78rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--y)}
+.y .tag{color:var(--k)}
+.tag::before{content:"";width:28px;height:4px;background:currentColor;transform:skewX(-20deg)}
+.lead{font-size:clamp(1.05rem,1.6vw,1.3rem);color:#d6d6d6}
+.y .lead{color:#2b2b2b}
+.hl{color:var(--y)}
+.y .hl{background:var(--k);color:var(--y);padding:0 .2em}
+/* gear deco */
+.gear{position:absolute;z-index:1;opacity:.07;pointer-events:none}
+.y .gear{opacity:.12}
+/* cover */
+.cover{background:var(--k);padding:0}
+.cover-grid{display:grid;grid-template-columns:1.1fr .9fr;min-height:100vh;min-height:100dvh}
+.cover-txt{display:flex;flex-direction:column;justify-content:center;gap:26px;padding:72px max(20px,5vw)}
+.cover-img{position:relative;background:var(--y)}
+.cover-img img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05)}
+.cover-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--k) 0,transparent 30%)}
+.logo{width:96px;height:96px;border-radius:50%;box-shadow:0 0 0 4px var(--k),0 0 0 7px var(--y)}
+.meta{display:flex;flex-wrap:wrap;gap:10px 22px;font:500 .8rem var(--mono);color:var(--g)}
+.stripe{height:10px;background:repeating-linear-gradient(-55deg,var(--y) 0 18px,var(--k) 18px 36px)}
+/* grid utils */
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:18px}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px}
+.card{background:var(--k3);border-radius:4px;padding:22px;display:grid;gap:10px;align-content:start;min-width:0;border-top:5px solid var(--y)}
+.y .card{background:var(--k);color:var(--w)}
+.card.bad{border-top-color:#ff5a3c}
+.card ul{margin:0;padding-left:18px;display:grid;gap:6px;color:#d0d0d0}
+.card p{color:#cfcfcf;font-size:.95rem}
+.card .lbl{font:700 .7rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--y)}
+.big{font:900 italic clamp(2.4rem,5vw,3.6rem)/1 var(--disp);color:var(--y)}
+.y .big{color:var(--k)}
+/* tables */
+.tbl{overflow-x:auto;border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:620px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--k);background:var(--y);white-space:nowrap}
+td{background:var(--k2)}
+tr.me td{background:var(--y);color:var(--k);font-weight:800}
+.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;font:700 .68rem var(--mono);padding:3px 9px;border-radius:2px;background:var(--k3);color:var(--y);white-space:nowrap;text-transform:uppercase;letter-spacing:.06em}
+.pill.hot{background:var(--y);color:var(--k)}
+/* bars */
+.bars{display:grid;gap:12px}
+.bar{display:grid;grid-template-columns:minmax(150px,240px) 1fr auto;gap:14px;align-items:center}
+.bar .t{font-weight:800;font-size:.95rem}
+.bar .track{height:30px;background:rgba(0,0,0,.12);position:relative}
+.bar .fill{height:100%;background:var(--k);transform:skewX(-14deg);transform-origin:left}
+.bar .v{font:700 .9rem var(--mono);min-width:150px;text-align:right}
+@media (max-width:640px){.bar{grid-template-columns:1fr;gap:4px}.bar .v{text-align:left}}
+/* heat */
+table.heat{min-width:760px}
+table.heat td.c{text-align:center;font:700 .82rem var(--mono);padding:12px 6px}
+.l0{background:#1c1c1c;color:#8a8a8a}.l1{background:#3b3420;color:#e8e2c4}.l2{background:#7d6a12;color:#fff}.l3{background:#d2b20c;color:var(--k)}.l4{background:var(--y);color:var(--k)}
+.legend{display:flex;gap:8px;align-items:center;font:500 .75rem var(--mono);color:var(--g);flex-wrap:wrap}
+.legend i{width:24px;height:12px;display:inline-block}
+/* photos */
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.photos img{aspect-ratio:1;object-fit:cover;width:100%;border-radius:2px}
+@media (max-width:700px){.photos{grid-template-columns:repeat(2,1fr)}}
+/* steps */
+.steps{display:grid;gap:10px}
+.step{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:start;background:var(--k);color:var(--w);padding:16px 20px;border-left:6px solid var(--y)}
+.step b.w{font:900 italic 1.25rem var(--disp);color:var(--y);text-transform:uppercase}
+.step p{color:#d4d4d4;font-size:.95rem}
+@media (max-width:640px){.step{grid-template-columns:1fr;gap:4px}}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.split img{width:100%;border-radius:4px;aspect-ratio:4/5;object-fit:cover}
+@media (max-width:860px){.split,.cover-grid{grid-template-columns:1fr}.cover-img{min-height:46vh;order:-1}.cover-img::after{background:linear-gradient(0deg,var(--k) 0,transparent 40%)}}
+.note{font:500 .78rem var(--mono);color:var(--g);max-width:none}
+.y .note{color:#4a4a4a}
+.callout{background:var(--k);color:var(--w);padding:22px 26px;border-left:8px solid var(--y);font-size:1.08rem}
+.callout b{color:var(--y)}
+/* nav */
+.hud{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:20;display:flex;gap:6px;align-items:center}
+.hud button{width:44px;height:44px;border:0;background:var(--y);color:var(--k);font:900 1.2rem var(--disp);cursor:pointer;border-radius:2px}
+.hud button:focus-visible{outline:3px solid var(--w);outline-offset:2px}
+.hud span{font:700 .78rem var(--mono);background:var(--k);color:var(--y);padding:12px 12px;border:1px solid var(--k3)}
+.brandbar{position:fixed;left:max(16px,env(safe-area-inset-left));top:max(14px,env(safe-area-inset-top));z-index:20;display:flex;align-items:center;gap:10px;font:900 italic .9rem var(--disp);text-transform:uppercase;mix-blend-mode:difference;color:#fff;pointer-events:none}
+.brandbar img{width:30px;height:30px;border-radius:50%;mix-blend-mode:normal}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="gear" viewBox="-100 -100 200 200">
+      <g fill="currentColor" id="teeth"></g>
+      <circle r="80" fill="none" stroke="currentColor" stroke-width="18"/>
+      <circle r="44" fill="none" stroke="currentColor" stroke-width="10"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="brandbar"><img src="img/logo.jpg" alt="">RP Bikes Shop</div>
+
+<!-- 1 CAPA -->
+<section class="slide cover" id="s1">
+  <div class="cover-grid">
+    <div class="cover-txt">
+      <img class="logo" src="img/logo.jpg" alt="Logo RP Bikes">
+      <span class="tag">Plano de tráfego pago · 2026/27</span>
+      <h1>Mais gente pedalando <span class="hl">com a RP</span></h1>
+      <p class="lead">Google Ads para capturar quem já procura bike, oficina e elétrica em BC. Meta e TikTok para criar demanda nas datas que movem o ciclismo no litoral.</p>
+      <div class="meta"><span>Balneário Camboriú · SC</span><span>@rpbikeshop1</span><span>Outubro 2026</span></div>
+    </div>
+    <div class="cover-img"><img src="img/fachada.jpg" alt="Fachada amarela da RP Bikes"></div>
+  </div>
+</section>
+
+<!-- 2 DIAGNOSTICO -->
+<section class="slide" id="s2">
+  <svg class="gear" style="width:520px;right:-160px;top:-120px;color:var(--y)"><use href="#gear"/></svg>
+  <div class="inner">
+    <span class="tag">01 · Onde a RP está hoje</span>
+    <h2>Loja forte, <span class="hl">vitrine digital fraca</span></h2>
+    <div class="g4">
+      <div class="card"><span class="big">4,6★</span><p>163 avaliações no Google. Oficina elogiada: "serviço impecável", "melhor loja da região".</p></div>
+      <div class="card"><span class="big">8,6 mil</span><p>seguidores locais no Instagram. Base pronta para remarketing e para impulsionar vídeos.</p></div>
+      <div class="card"><span class="big">2017</span><p>no mercado. Mix com busca alta: scooters e bikes elétricas, Hupi Naja, Oggi, gravel.</p></div>
+      <div class="card bad"><span class="big" style="color:#ff5a3c">0</span><p><b>site próprio.</b> O Google aponta para o Instagram. Sem página não há Shopping nem medição de venda.</p></div>
+    </div>
+    <div class="callout">Outros gargalos: a <b>Pedal Bike tem 692 avaliações</b> (4x mais), há uma reclamação pública de atendimento na recepção e o CEP aparece diferente no Google (88338-063) e nos cadastros (88330-075).</div>
+  </div>
+</section>
+
+<!-- 3 CONCORRENCIA -->
+<section class="slide k2" id="s3">
+  <div class="inner">
+    <span class="tag">02 · Concorrência em BC</span>
+    <h2>Quem disputa o mesmo cliente</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Loja</th><th class="n">Nota</th><th class="n">Avaliações</th><th>Posicionamento</th><th>Ameaça</th></tr></thead>
+      <tbody>
+        <tr><td><b>Pedal Bike</b><br><small>4ª Av., 1445</small></td><td class="n">4,7</td><td class="n">692</td><td>"Maior e mais completa da região". E-commerce, ~40 marcas (Oggi, Hupi, Caloi, Scott), 6x sem juros, 5% à vista</td><td><span class="pill hot">Direta · alta</span></td></tr>
+        <tr><td><b>Bicicletaria Aquários</b></td><td class="n">4,5</td><td class="n">282</td><td>Bicicletaria tradicional e oficina</td><td><span class="pill">Média</span></td></tr>
+        <tr><td><b>Bike e Motos Express</b></td><td class="n">4,8</td><td class="n">175</td><td>Oficina de bike e moto</td><td><span class="pill">Média</span></td></tr>
+        <tr><td><b>Pedal Sul</b></td><td class="n">4,7</td><td class="n">119</td><td>Atacado e varejo, briga por preço</td><td><span class="pill">Média</span></td></tr>
+        <tr><td><b>Riders Bike Shop</b></td><td class="n">4,7</td><td class="n">105</td><td>Premium: Trek, Cannondale, Scott, café e chopp, e-commerce</td><td><span class="pill">Premium</span></td></tr>
+        <tr><td><b>JM Bike</b></td><td class="n">4,4</td><td class="n">103</td><td>Venda e oficina autorizada</td><td><span class="pill">Média</span></td></tr>
+        <tr><td><b>MBS My Bike Shop</b></td><td class="n">·</td><td class="n">·</td><td>Specialized, serviço autorizado Shimano, café</td><td><span class="pill">Premium</span></td></tr>
+        <tr><td>P&amp;F, Up Bike, Talegô, Haake</td><td class="n">4,7 a 5,0</td><td class="n">21 a 106</td><td>Oficinas e lojas de bairro</td><td><span class="pill">Baixa</span></td></tr>
+        <tr class="me"><td>RP Bikes Shop</td><td class="n">4,6</td><td class="n">163</td><td>Bikes, peças, oficina, scooters elétricas</td><td>Nós</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Fonte: Google Maps e sites das lojas, levantamento de 21/10/2026.</p>
+  </div>
+</section>
+
+<!-- 4 POSICIONAMENTO -->
+<section class="slide y" id="s4">
+  <svg class="gear" style="width:640px;left:-220px;bottom:-260px;color:var(--k)"><use href="#gear"/></svg>
+  <div class="inner split">
+    <div style="display:grid;gap:22px">
+      <span class="tag">03 · Onde a RP ganha</span>
+      <h2>Não brigar no premium. <span class="hl">Ganhar no serviço.</span></h2>
+      <p class="lead">A Pedal Bike vende as mesmas marcas com mais avaliações. Riders e MBS dominam Trek e Specialized. O espaço livre é o que nenhuma delas comunica:</p>
+      <div class="g2">
+        <div class="card"><span class="lbl">Elétricas</span><h3>Test ride na loja</h3><p>Scooter, bike elétrica e Hupi Naja com teste antes de comprar.</p></div>
+        <div class="card"><span class="lbl">Oficina</span><h3>Pós-venda próprio</h3><p>Revisão e garantia na mesma loja. Cliente que volta ano após ano.</p></div>
+      </div>
+    </div>
+    <img src="img/parede.jpg" alt="Parede de bicicletas da RP Bikes">
+  </div>
+</section>
+
+<!-- 5 KEYWORDS GRUPOS -->
+<section class="slide y" id="s5" style="background:var(--y2)">
+  <div class="inner">
+    <span class="tag">04 · Quanto se busca na região</span>
+    <h2>29 mil buscas por mês</h2>
+    <p class="lead">Google Keyword Planner: Balneário Camboriú, Itajaí, Camboriú, Itapema e Navegantes. Média de out/25 a set/26. CPC = faixa de lance para aparecer no topo.</p>
+    <div class="bars" id="bars"></div>
+    <p class="note">Variantes com acento e plural somadas uma vez só. Lista completa com 271 termos na planilha anexa.</p>
+  </div>
+</section>
+
+<!-- 6 TERMOS -->
+<section class="slide" id="s6">
+  <div class="inner">
+    <span class="tag">05 · Termos principais e custo</span>
+    <h2>O clique é barato. <span class="hl">A intenção é o que importa.</span></h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Palavra-chave</th><th class="n">Buscas/mês</th><th class="n">CPC mín.</th><th class="n">CPC máx.</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td>scooter elétrica</td><td class="n">4.400</td><td class="n">R$ 0,32</td><td class="n">R$ 1,42</td><td>Volume alto, muita busca de e-commerce</td></tr>
+        <tr><td>bicicleta elétrica</td><td class="n">2.400</td><td class="n">R$ 0,26</td><td class="n">R$ 1,23</td><td>Volume alto</td></tr>
+        <tr><td>patinete elétrico</td><td class="n">1.900</td><td class="n">R$ 0,22</td><td class="n">R$ 0,95</td><td>Volume alto</td></tr>
+        <tr><td><b>bicicletaria</b></td><td class="n">1.000</td><td class="n">R$ 0,37</td><td class="n">R$ 2,76</td><td><span class="pill hot">Intenção local</span></td></tr>
+        <tr><td>bicicleta aro 29</td><td class="n">880</td><td class="n">R$ 0,24</td><td class="n">R$ 0,97</td><td>Produto</td></tr>
+        <tr><td>moto elétrica adulto</td><td class="n">880</td><td class="n">R$ 0,22</td><td class="n">R$ 1,14</td><td>Mobilidade e entregadores</td></tr>
+        <tr><td>bicicleta infantil</td><td class="n">590</td><td class="n">R$ 0,14</td><td class="n">R$ 0,69</td><td>Explode no Natal</td></tr>
+        <tr><td><b>oficina de bicicleta</b></td><td class="n">480</td><td class="n">·</td><td class="n">·</td><td><span class="pill hot">Ninguém anuncia</span></td></tr>
+        <tr><td>hupi naja</td><td class="n">390</td><td class="n">R$ 0,10</td><td class="n">R$ 0,69</td><td>Marca que a RP vende</td></tr>
+        <tr><td><b>bicicletaria perto de mim</b></td><td class="n">320</td><td class="n">R$ 0,38</td><td class="n">R$ 2,14</td><td><span class="pill hot">Intenção local</span></td></tr>
+        <tr><td><b>loja de bicicleta</b></td><td class="n">210</td><td class="n">R$ 0,67</td><td class="n">R$ 2,90</td><td><span class="pill hot">Intenção local</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 7 ESTRUTURA GOOGLE -->
+<section class="slide k2" id="s7">
+  <svg class="gear" style="width:480px;right:-150px;bottom:-170px;color:var(--y)"><use href="#gear"/></svg>
+  <div class="inner">
+    <span class="tag">06 · Estrutura no Google Ads</span>
+    <h2>4 campanhas, R$ 1.450/mês para começar</h2>
+    <div class="g4">
+      <div class="card"><span class="lbl">Pesquisa · R$ 500</span><h3>Loja + Oficina</h3><p>bicicletaria, loja de bicicleta, oficina, conserto, revisão. Raio de 12 km. Extensões de local, ligação e WhatsApp.</p></div>
+      <div class="card"><span class="lbl">Pesquisa · R$ 600</span><h3>Elétricas</h3><p>Scooter, bike elétrica, patinete, moto elétrica, Hupi Naja. Raio de 25 km. "Test ride na loja" no anúncio.</p></div>
+      <div class="card"><span class="lbl">Pesquisa · R$ 300</span><h3>Bikes por categoria</h3><p>Aro 29, Oggi, Caloi, feminina, gravel, speed e infantil (forte de outubro a dezembro).</p></div>
+      <div class="card"><span class="lbl">Marca · R$ 50</span><h3>Proteção</h3><p>"rp bikes" em exata. Performance Max com catálogo na fase 2, depois do site no ar.</p></div>
+    </div>
+    <div class="g3">
+      <div class="card"><span class="big">~1.340</span><p>cliques por mês, pelo CPC médio de cada grupo</p></div>
+      <div class="card"><span class="big">105 a 165</span><p>conversas no WhatsApp ou ligações por mês (10% a 15% dos cliques)</p></div>
+      <div class="card"><span class="big">R$ 9 a 14</span><p>meta inicial de custo por conversa, validada nas 4 primeiras semanas</p></div>
+    </div>
+    <p class="note">Negativas desde o dia 1: mercado livre, shopee, olx, amazon, usada, aluguel, ergométrica, desenho, brinquedo, motorizada, gasolina, emprego, curso.</p>
+  </div>
+</section>
+
+<!-- 8 SAZONALIDADE -->
+<section class="slide" id="s8">
+  <div class="inner">
+    <span class="tag">07 · Sazonalidade real da busca</span>
+    <h2>Cada categoria tem <span class="hl">seu mês</span></h2>
+    <div class="tbl"><table class="heat" id="heat"></table></div>
+    <div class="legend"><i class="l0"></i>abaixo de 85 <i class="l1"></i>85 a 104 <i class="l2"></i>105 a 119 <i class="l3"></i>120 a 139 <i class="l4"></i>140+ <span>· índice 100 = média do ano na região</span></div>
+    <div class="g3">
+      <div class="card"><span class="lbl">Infantil</span><h3>Dezembro a 194</h3><p>Quase o dobro da média, puxado pelo Natal. Outubro e novembro já rodam a 138.</p></div>
+      <div class="card"><span class="lbl">Elétricas e MTB</span><h3>Pico em março</h3><p>Elétricas sobem em janeiro (122) e batem 140 em março. Loja e MTB têm o melhor trimestre de jan a mar.</p></div>
+      <div class="card"><span class="lbl">Inverno</span><h3>Hora da oficina</h3><p>Junho a agosto é o vale de tudo. Corta verba de venda e empurra revisão.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 CALENDARIO -->
+<section class="slide k2" id="s9">
+  <div class="inner">
+    <span class="tag">08 · Calendário Meta + TikTok</span>
+    <h2>O ano da RP em datas</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Quando</th><th>Gancho</th><th>Meta (Instagram/Facebook)</th><th>TikTok</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><td><b>Nov</b><br><small>Black Friday 27/11</small></td><td>Black da RP: elétricas e aro 29</td><td>Lista VIP no WhatsApp 15 dias antes; oferta de 24 a 30/11; remarketing</td><td>Contagem regressiva, test ride</td><td><span class="pill hot">Alto</span></td></tr>
+        <tr><td><b>Dez</b><br><small>Natal</small></td><td>Primeira bike de Natal</td><td>Pais e mães 28 a 45; carrossel por idade e aro; montagem e laço grátis até 24/12</td><td>Qual aro para cada idade</td><td><span class="pill hot">Máximo</span></td></tr>
+        <tr><td><b>Jan a fev</b><br><small>Temporada</small></td><td>Verão em BC: orla e Interpraias</td><td>Elétricas para quem mora e trabalha na cidade; revisão expressa</td><td>POV pedal na Av. Atlântica</td><td><span class="pill hot">Alto</span></td></tr>
+        <tr><td><b>Mar</b><br><small>Pico elétricas</small></td><td>Troque o carro pela elétrica</td><td>Conta de economia (combustível e estacionamento vs. recarga); público 25 a 55 e entregadores</td><td>"Fiz a conta de quanto gasto"</td><td><span class="pill hot">Máximo</span></td></tr>
+        <tr><td><b>Abr a mai</b><br><small>Dia das Mães</small></td><td>Feminina aro 29 e urbana</td><td>Presente para mãe; filhos de 20 a 40</td><td>Mãe testando a bike</td><td><span class="pill">Médio</span></td></tr>
+        <tr><td><b>Jun a jul</b><br><small>Inverno</small></td><td>Revisão de inverno</td><td>Revisão com preço fechado; acessórios para a base de clientes</td><td>Oficina por dentro</td><td><span class="pill">Baixo</span></td></tr>
+        <tr><td><b>Ago</b><br><small>Dia dos Pais</small></td><td>Gravel, MTB e speed</td><td>Carrossel por modalidade; 30 a 55 com interesse em ciclismo</td><td>Pai e filho no pedal</td><td><span class="pill">Médio</span></td></tr>
+        <tr><td><b>Set</b><br><small>Dia sem Carro 22/09</small></td><td>Mobilidade e primavera</td><td>Revisão de primavera; elétricas; depoimentos</td><td>Uma semana sem carro</td><td><span class="pill">Médio</span></td></tr>
+        <tr><td><b>Out</b><br><small>Dia das Crianças</small></td><td>Infantil e equilíbrio</td><td>Abre a janela infantil, que segue até o Natal</td><td>Tirando as rodinhas</td><td><span class="pill">Médio</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 10 PUBLICOS E CRIATIVOS -->
+<section class="slide" id="s10">
+  <div class="inner">
+    <span class="tag">09 · Públicos e criativos</span>
+    <h2>Mostrar a loja de verdade</h2>
+    <div class="photos">
+      <img src="img/scooter.jpg" alt="Scooter elétrica">
+      <img src="img/mtb-azul.jpg" alt="MTB azul">
+      <img src="img/speed.jpg" alt="Bike speed">
+      <img src="img/mtb-vermelha.jpg" alt="MTB vermelha">
+    </div>
+    <div class="g2">
+      <div class="card"><span class="lbl">Públicos Meta</span><ul>
+        <li>Raio de 15 km da loja, 22 a 60, ciclismo, MTB, Strava, triathlon</li>
+        <li>Pais e mães de outubro a dezembro</li>
+        <li>Mobilidade: 25 a 55 em BC e Itajaí, entregadores</li>
+        <li>Remarketing: engajou no Instagram, conversou no WhatsApp</li>
+        <li>Semelhante 1% da lista de clientes</li>
+      </ul></div>
+      <div class="card"><span class="lbl">Criativos</span><ul>
+        <li>Vídeo vertical na loja, com vendedor ou mecânico falando</li>
+        <li>Preço e parcela na tela</li>
+        <li>Test ride de elétrica na orla, com velocidade e autonomia</li>
+        <li>Antes e depois da revisão, avaliações do Google</li>
+        <li>3 a 5 criativos por campanha, troca a cada 15 a 21 dias</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 EXECUCAO -->
+<section class="slide y" id="s11">
+  <div class="inner">
+    <span class="tag">10 · Ordem de execução</span>
+    <h2>Primeiros 30 dias</h2>
+    <div class="steps">
+      <div class="step"><b class="w">Semana 1</b><p><b>Base de medição.</b> Landing com catálogo (elétricas, infantil, aro 29, oficina), WhatsApp e mapa. GA4, conversões do Google Ads, Pixel e API de Conversões da Meta, Pixel do TikTok.</p></div>
+      <div class="step"><b class="w">Semana 1</b><p><b>Google Meu Negócio.</b> Corrigir CEP, produtos com preço, 1 post por semana, responder todas as avaliações. Pedir avaliação a quem comprou ou revisou no último ano (meta: 250 até março).</p></div>
+      <div class="step"><b class="w">Semana 2</b><p><b>Google Ads no ar:</b> Loja + Oficina, Elétricas e Marca. Termos de pesquisa revisados todo dia na primeira semana.</p></div>
+      <div class="step"><b class="w">Semana 2</b><p><b>Meta Black Friday.</b> Lista VIP a partir de 12/11, oferta de 24 a 30/11.</p></div>
+      <div class="step"><b class="w">Semana 3</b><p><b>Bikes por categoria + infantil</b> para o Natal. TikTok com 3 vídeos da loja impulsionados (Spark Ads).</p></div>
+      <div class="step"><b class="w">Semana 4</b><p><b>Primeiro ajuste.</b> Custo por conversa e por venda em cada canal (etiquetas Google, Meta e TikTok no WhatsApp). Verba vai para o que vende.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 VERBA -->
+<section class="slide" id="s12">
+  <svg class="gear" style="width:560px;left:-200px;top:-200px;color:var(--y)"><use href="#gear"/></svg>
+  <div class="inner">
+    <span class="tag">11 · Investimento em mídia</span>
+    <h2>Verba que segue a curva de busca</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Mês</th><th class="n">Google</th><th class="n">Meta</th><th class="n">TikTok</th><th class="n">Total</th></tr></thead>
+      <tbody id="budget"></tbody>
+    </table></div>
+    <p class="note">Meses em amarelo são os picos. Valores de mídia, sem fee de gestão. Ajuste após 4 semanas com o custo por venda real. Estimativas são ponto de partida, não garantia de resultado.</p>
+  </div>
+</section>
+
+<!-- 13 FECHAMENTO -->
+<section class="slide cover" id="s13">
+  <div class="cover-grid">
+    <div class="cover-txt">
+      <img class="logo" src="img/logo.jpg" alt="Logo RP Bikes">
+      <span class="tag">Próximo passo</span>
+      <h1>Bora <span class="hl">pedalar?</span></h1>
+      <p class="lead">Aprovando o plano, a semana 1 começa com a landing page, o Google Meu Negócio e as tags. A primeira campanha entra no ar na semana 2, a tempo da Black Friday.</p>
+      <div class="meta"><span>Av. do Estado Dalmo Vieira, 2870 · Nações · BC</span><span>(47) 99905-0252</span></div>
+    </div>
+    <div class="cover-img"><img src="img/mtb-preta.jpg" alt="MTB na frente da loja"></div>
+  </div>
+</section>
+
+<div class="hud" aria-label="Navegação">
+  <button id="prev" aria-label="Slide anterior">↑</button>
+  <span id="count">1 / 13</span>
+  <button id="next" aria-label="Próximo slide">↓</button>
+</div>
+
+<script>
+// dentes da coroa
+const teeth=document.getElementById("teeth");
+for(let i=0;i<18;i++){const p=document.createElementNS("http://www.w3.org/2000/svg","path");p.setAttribute("d","M-9,-98 L9,-98 L12,-80 L-12,-80 Z");p.setAttribute("transform",`rotate(${i*20})`);teeth.appendChild(p)}
+
+const grupos=[["Elétricas (scooter, bike, patinete)",14910,"0,26 a 1,19"],["MTB, aro 29, urbana, marcas",5870,"0,20 a 0,88"],["Capacetes e acessórios",2830,"0,22 a 1,02"],["Infantil",2800,"0,19 a 0,87"],["Loja / bicicletaria local",2050,"0,40 a 2,58"],["Oficina, revisão, peças",820,"0,15 a 0,81"],["Speed e gravel",410,"0,10 a 0,70"]];
+const max=grupos[0][1];
+document.getElementById("bars").innerHTML=grupos.map(([t,v,c])=>`<div class="bar"><span class="t">${t}</span><div class="track"><div class="fill" style="width:${Math.max(2,v/max*100)}%"></div></div><span class="v">${v.toLocaleString("pt-BR")} · R$ ${c}</span></div>`).join("");
+
+const meses=["out","nov","dez","jan","fev","mar","abr","mai","jun","jul","ago","set"];
+const saz={"Elétricas":[82,82,85,122,113,140,113,91,77,95,105,95],"Infantil":[138,137,194,87,72,89,82,68,69,78,82,102],"Loja / oficina":[104,89,128,131,100,119,99,98,78,77,87,91],"MTB / aro 29":[107,108,101,126,111,118,103,86,79,85,89,86],"Speed / gravel":[101,89,94,137,99,115,108,83,98,92,94,89],"Capacetes":[109,111,96,114,98,103,103,97,84,96,96,93]};
+const lv=v=>v>=140?4:v>=120?3:v>=105?2:v>=85?1:0;
+let h="<thead><tr><th>Categoria</th>"+meses.map(m=>`<th class="n">${m}</th>`).join("")+"</tr></thead><tbody>";
+for(const [k,vs] of Object.entries(saz)) h+=`<tr><td><b>${k}</b></td>`+vs.map(v=>`<td class="c l${lv(v)}">${v}</td>`).join("")+"</tr>";
+document.getElementById("heat").innerHTML=h+"</tbody>";
+
+const b=[["Nov/26",1800,2500,700],["Dez/26",2300,2800,900],["Jan/27",2200,2200,800],["Fev/27",1800,1800,600],["Mar/27",2300,2500,900],["Abr/27",1700,1700,600],["Mai/27",1500,1800,600],["Jun/27",1100,1200,400],["Jul/27",1100,1000,400],["Ago/27",1400,1600,500],["Set/27",1600,1600,600],["Out/27",1700,1800,600]];
+const f=n=>"R$ "+n.toLocaleString("pt-BR");
+let tot=[0,0,0];
+document.getElementById("budget").innerHTML=b.map(([m,g,me,t])=>{tot[0]+=g;tot[1]+=me;tot[2]+=t;return `<tr${g+me+t>=5000?' class="me"':''}><td>${m}</td><td class="n">${f(g)}</td><td class="n">${f(me)}</td><td class="n">${f(t)}</td><td class="n"><b>${f(g+me+t)}</b></td></tr>`}).join("")
+ +`<tr><td><b>12 meses</b></td><td class="n"><b>${f(tot[0])}</b></td><td class="n"><b>${f(tot[1])}</b></td><td class="n"><b>${f(tot[2])}</b></td><td class="n"><b>${f(tot[0]+tot[1]+tot[2])}</b></td></tr>`;
+
+// navegação
+const slides=[...document.querySelectorAll(".slide")];
+const count=document.getElementById("count");
+let cur=0;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cur=slides.indexOf(e.target);count.textContent=`${cur+1} / ${slides.length}`}}),{threshold:.5});
+slides.forEach(s=>io.observe(s));
+const go=i=>slides[Math.max(0,Math.min(slides.length-1,i))].scrollIntoView({behavior:"smooth"});
+document.getElementById("next").onclick=()=>go(cur+1);
+document.getElementById("prev").onclick=()=>go(cur-1);
+addEventListener("keydown",e=>{
+  if(["ArrowDown","ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();go(cur+1)}
+  if(["ArrowUp","ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();go(cur-1)}
+});
+</script>
+</body>
+</html>
